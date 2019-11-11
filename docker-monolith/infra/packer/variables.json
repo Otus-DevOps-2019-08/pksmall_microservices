@@ -1,0 +1,10 @@
+{
+   "gcp-proj-id": "hypnotic-trees-257709",
+   "src-img-fml": "ubuntu-1604-lts",
+   "mach-type": "f1-micro",
+   "disk-size": "10",
+   "disk-type": "pd-standard",
+   "img-desc": "Docker Image",
+   "net-name": "default",
+   "tag": "docker-test"
+}
