@@ -1,0 +1,2 @@
+env: stage
+default_container_image: pksmall/otus-reddit:1.0

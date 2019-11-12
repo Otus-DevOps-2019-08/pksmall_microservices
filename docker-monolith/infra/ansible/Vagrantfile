@@ -1,0 +1,119 @@
+=begin
+require 'yaml'
+
+current_dir    = File.dirname(File.expand_path(__FILE__))
+configs        = YAML.load_file("#{current_dir}/config.yaml")
+vagrant_config = configs['configs'][configs['configs']['use']]
+
+Vagrant.configure('2') do |config|
+
+    config.vm.network 'public_network', ip: vagrant_config['public_ip']
+    ...
+config.yaml:
+
+---
+configs:
+    use: 'home'
+    office:
+        public_ip: '192.168.2.117'
+        <more variables>...
+    home:
+        public_ip: '192.168.1.117'
+        <more variables>...
+
+
+На тему вагранта - если машин много, то удобно описывать их свойства в начале файла
+MACHINES = {
+    :master => {
+        :box_name => "centos/7",
+        :ip_addr => '192.168.11.101',
+        :disks => {
+            :sata1 => {
+                :dfile => './sata1.vdi',
+                :size => 250,
+                :port => 1
+            },
+            :sata2 => {
+                :dfile => './sata2.vdi',
+                :size => 250, # Megabytes
+                :port => 2
+            },
+        },
+        :slave => {
+            :box_name => "centos/7",
+            :ip_addr => '192.168.11.102',
+            :disks => {
+                :sata1 => {
+                    :dfile => './sata1.vdi',
+                    :size => 250,
+                    :port => 1
+                },
+                :sata2 => {
+                    :dfile => './sata2.vdi',
+                    :size => 250, # Megabytes
+                    :port => 2
+                },
+            },
+        },
+    }
+}
+
+перебор переменных
+
+Vagrant.configure("2") do |config|
+    MACHINES.each do |boxname, boxconfig|
+        config.vm.define boxname do |box|
+            box.vm.box = boxconfig[:box_name]
+            box.vm.host_name = boxname.to_s
+            box.vm.network "private_network", ip: boxconfig[:ip_addr]
+        end
+    end
+end
+=end
+
+Vagrant.configure("2") do |config|
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 512
+  end
+
+  config.vm.define "dbserver" do |db|
+    db.vm.box = "ubuntu/xenial64"
+    db.vm.hostname = "dbserver"
+    db.vm.network :private_network, ip: "10.10.10.10"
+
+    db.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/site.yml"
+      ansible.groups = {
+      "db" => ["dbserver"],
+      "db:vars" => {"mongo_bind_ip" => "0.0.0.0"}
+      }
+    end
+  end
+
+  config.vm.define "appserver" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.hostname = "appserver"
+    app.vm.network :private_network, ip: "10.10.10.20"
+
+    app.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/site.yml"
+      ansible.groups = {
+       "app" => ["appserver"],
+       "app:vars" => {
+        "db_host" => "10.10.10.10",
+       }
+      }
+      ansible.extra_vars = {
+       "deploy_user" => "vagrant",
+       "nginx_sites" => {
+        "default" => {
+            "server_name 'reddit'": "",
+            "listen 80": "",
+            "location / {proxy_pass http://127.0.0.1:9292;}": ""
+        }
+       }
+      }
+    end
+  end
+end
