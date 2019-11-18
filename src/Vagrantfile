@@ -1,0 +1,16 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 2048
+  end
+
+  config.vm.define "hwtest" do |ot|
+    ot.vm.box = "ubuntu/xenial64"
+    ot.vm.hostname = "hwtest"
+    ot.vm.network :private_network, ip: "10.10.10.10"
+
+    ot.vm.provision "shell" do |bs|
+      bs.path = "boot.sh"
+    end
+  end
+end
