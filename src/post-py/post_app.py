@@ -4,6 +4,7 @@ import time
 import structlog
 import traceback
 import requests
+import logging
 from flask import Flask, request, Response, abort, logging
 from pymongo import MongoClient
 from bson.objectid import ObjectId
