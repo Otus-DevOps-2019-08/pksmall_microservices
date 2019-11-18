@@ -27,6 +27,7 @@ services:
   comment:
     build: ./comment
     image: ${USERNAME}/comment:${COMMENT_VER}
+    command: ["puma", "--debug", "-w 2"]
     volumes:
       - comment_src:/app
     networks:
