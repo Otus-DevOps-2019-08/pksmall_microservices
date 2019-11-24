@@ -13,12 +13,13 @@ variables:
 before_script:
   - cd reddit
   - bundle install
+  - docker info
 
 build_job:
   stage: build
   script:
     - echo 'Building'
-    - docker build
+    - docker build -t reddit-app .
 
 test_unit_job:
   stage: test
