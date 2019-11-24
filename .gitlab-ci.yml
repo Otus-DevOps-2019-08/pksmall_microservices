@@ -18,7 +18,7 @@ build_job:
   stage: build
   script:
     - echo 'Building'
-    - cd src && docker-compose build
+    - ls -la && pwd && cd src && docker-compose build
 
 test_unit_job:
   stage: test
