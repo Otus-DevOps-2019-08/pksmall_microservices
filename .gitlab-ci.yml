@@ -13,12 +13,14 @@ before_script:
 
 
 build_job:
-  image: docker:19.03.1
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   stage: build
   script:
     - echo 'Building'
-    - docker info
-    - docker build -t reddit-app .
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
 
 test_unit_job:
   image: ruby:2.4.2
