@@ -6,6 +6,9 @@ pksmall microservices repository
 
 ## Branches
 
+### gitlab-ci-1
++ Создана новая ветка
+
 ### docker-4
 + Создана новая ветка
 + `docker run --network host -d nginx` несколько раз запущен, но контейнер только один, т.к.
