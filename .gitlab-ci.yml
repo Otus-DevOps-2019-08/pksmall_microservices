@@ -15,11 +15,6 @@ before_script:
 build_job:
   image: docker:19.03.1
   stage: build
-  services:
-    - docker:19.03.1-dind
-  variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: ""
   script:
     - echo 'Building'
     - docker info
