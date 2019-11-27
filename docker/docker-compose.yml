@@ -1,0 +1,85 @@
+version: '3.3'
+services:
+  post_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      back_net:
+        aliases:
+            - post_db
+            - comment_db
+
+  ui:
+    image: ${USERNAME}/ui:${UI_VER}
+    ports:
+      - ${UI_PORT_FRONT}:${UI_PORT_BACK}/tcp
+    networks:
+      - front_net
+
+  post:
+    image: ${USERNAME}/post:${POST_VER}
+    networks:
+      - front_net
+      - back_net
+
+  comment:
+    image: ${USERNAME}/comment:${COMMENT_VER}
+    networks:
+      - front_net
+      - back_net
+
+  prometheus:
+    image: ${USERNAME}/prometheus:${PROMETHEUS_VER}
+    ports:
+      - '9090:9090'
+    volumes:
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+    networks:
+      - front_net
+      - back_net
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      - back_net
+
+  mongodb-exporter:
+    image: ssheehy/mongodb-exporter
+    command:
+      - '--collect.database'
+      - '--collect.collection'
+      - '--collect.topmetrics'
+      - '--collect.indexusage'
+      - '--collect.connpoolstats'
+      - '--mongodb.uri=mongodb://post_db:27017'
+    networks:
+      - back_net
+
+  cloud-prober:
+    image: ${USERNAME}/cloudprober
+    networks:
+      - front_net
+      - back_net
+
+volumes:
+  post_db:
+  prometheus_data:
+  mongo_db:
+
+networks:
+  front_net:
+  back_net:
