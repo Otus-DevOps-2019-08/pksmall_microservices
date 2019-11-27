@@ -20,3 +20,12 @@ build-all:
 	cd ../src/comment && bash docker_build.sh && cd $(ORIGDIR)
 	cd ../monitoring/cloudprober && docker build -t $(USERNAME)/cloudprober . && cd $(ORIGDIR)
 	cd ../monitoring/prometheus && docker build -t $(USERNAME)/prometheus . && cd $(ORIGDIR)
+
+# Push images to docker hub
+.PHONY: push-all
+push-all:
+	docker push $(USERNAME)/ui
+	docker push $(USERNAME)/comment
+	docker push $(USERNAME)/post
+	docker push $(USERNAME)/cloudprober
+	docker push $(USERNAME)/prometheus
