@@ -17,3 +17,5 @@ vault.key
 Pipfile
 Pipfile*
 .idea/
+.env
+

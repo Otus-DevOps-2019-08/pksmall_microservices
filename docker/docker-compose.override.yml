@@ -7,7 +7,7 @@ services:
     networks:
       - back_net
   ui:
-    build: ./ui
+    build: ../src/ui
     image: ${USERNAME}/ui:${UI_VER}
     command: ["puma", "--debug", "-w 2"]
     volumes:
@@ -17,7 +17,7 @@ services:
     networks:
       - front_net
   post:
-    build: ./post-py
+    build: ../src/post-py
     image: ${USERNAME}/post:${POST_VER}
     volumes:
       - post_src:/app
@@ -25,7 +25,7 @@ services:
       - front_net
       - back_net
   comment:
-    build: ./comment
+    build: ../src/comment
     image: ${USERNAME}/comment:${COMMENT_VER}
     command: ["puma", "--debug", "-w 2"]
     volumes:

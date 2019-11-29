@@ -6,6 +6,14 @@ pksmall microservices repository
 
 ## Branches
 
+### monotoring-1
++ Создана новая ветка
++ Реорганизовал файлы
++ Добавил в `docker-compose.yml` запуск `prometheus` и `node-exporter`.
++ Добавил мониторинг `mongodb`. Используется `ssheehy/mongodb-exporter`. `*`
++ Добавил blackbox  `cloudprober`. `*`
++ Написан `Makefile` для автоматизация запуска и обновления контейнеров.
+
 ### gitlab-ci-1
 + Создана новая ветка
 + Создан новый виртуальный хост с помощью `docker-machine`.
