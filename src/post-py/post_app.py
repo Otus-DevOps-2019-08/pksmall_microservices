@@ -27,7 +27,6 @@ log = structlog.get_logger()
 app = Flask(__name__)
 
 class DummyTransport(BaseTransportHandler):
-
     def get_max_payload_bytes(self):
         return None
 
@@ -90,6 +89,10 @@ def init(app):
     app.post_count = prometheus_client.Counter(
         'post_count',
         'A counter of new posts'
+    )
+    app.post_create_db_seconds = prometheus_client.Histogram(
+        'post_create_db_seconds',
+        'Create post DB time'
     )
     # database client connection
     app.db = MongoClient(
@@ -164,6 +167,7 @@ def vote():
 # Add new post
 @app.route('/add_post', methods=['POST'])
 def add_post():
+    start_time = time.time()
     try:
         title = request.values.get('title')
         link = request.values.get('link')
@@ -181,6 +185,9 @@ def add_post():
                   {'title': title, 'link': link})
         abort(500)
     else:
+        stop_time = time.time()  # + 0.3
+        resp_time = stop_time - start_time
+        app.post_create_db_seconds.observe(resp_time)
         log_event('info', 'post_create', 'Successfully created a new post',
                   {'title': title, 'link': link})
         app.post_count.inc()

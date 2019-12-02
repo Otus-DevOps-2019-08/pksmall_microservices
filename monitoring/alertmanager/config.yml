@@ -1,0 +1,16 @@
+global:
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  receiver: 'slack-notifications'
+
+receivers:
+  - name: 'slack-notifications'
+  - name: 'alertmananger-bot'
+    webhook_configs:
+    - send_resolved: true
+      url: 'http://alertmanager-bot:8080'
+
+slack_configs:
+  - channel: #pavel_korzhenko
+
