@@ -83,7 +83,7 @@ services:
     networks:
       - front_net
       - back_net
-      -
+
   alertmanager-bot:
     image: metalmatze/alertmanager-bot:0.4.0
     environment:
