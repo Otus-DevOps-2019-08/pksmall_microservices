@@ -6,6 +6,22 @@ pksmall microservices repository
 
 ## Branches
 
+### monotoring-2
++ Создана новая ветка
++ Разделил файл `docker-compose.yml` на два.
++ Добавил `cAdivor` и `grafana` в файл `docker-compose-monitoring.yml`
++ Импортировал дашборд с сайта `grafana`
++ Создал новый дашборд для сбора метрик. Добавил графики работы приложений.
++ Добавил алертиниг в `prometheus`
++ Дописал `Makefile`. `*`
++ Добавил сбор метрик с докер демона и дашборд к нему `docker-engine-metrics_rev3.json`.`*`
++ Добавил `telegraf` и дашборд `telegraf-metrics_rev1.json`. `*`
++ Добавил 2 алерта. `CpuUserLoad` и `HighHttpRequestDuration`. `*`
++ Добавил `telegram` нотификатор. email использовать 2019 году как-то не хорошо :). `*`
++ Создал свой конфиг для `grafana`. Добавил дашборды и `stackdriver`. `**`
++ Добавил в `post` метрику `app.post_create_db_seconds` - вычесляет время создания поста. `**`
+
+
 ### monotoring-1
 + Создана новая ветка
 + Реорганизовал файлы

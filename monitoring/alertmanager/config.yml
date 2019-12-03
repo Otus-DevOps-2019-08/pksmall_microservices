@@ -1,0 +1,34 @@
+global:
+  resolve_timeout: 5m
+  smtp_from: alertmanager@prometheus.example.com
+  smtp_smarthost: mx1.example.com:25
+  smtp_require_tls: false
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  receiver: 'slack-notifications'
+
+  receiver: 'alertmananger-bot'
+  routes:
+    - receiver: 'alertmananger-bot'
+      group_interval: 10m
+
+
+receivers:
+  - name: 'alertmananger-bot'
+    webhook_configs:
+      - url: 'http://alertmanager-bot:8080'
+
+  - name: email
+    email_configs:
+      - send_resolved: false
+        to: XXX@example.com
+        headers:
+          From: alertmanager@prometheus.example.com
+          Subject: '{{ template "email.default.subject" . }}'
+          To: XXXXXXX@example.com
+        html: '{{ template "email.default.html" . }}'
+
+  - name: 'slack-notifications'
+    slack_configs:
+      - channel: #pavel_korzhenko
