@@ -6,6 +6,9 @@ pksmall microservices repository
 
 ## Branches
 
+### logging-1
++ Создана новая ветка
+
 ### monotoring-2
 + Создана новая ветка
 + Разделил файл `docker-compose.yml` на два.
