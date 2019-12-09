@@ -46,8 +46,19 @@ services:
     networks:
       - efk_net
 
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - efk_net
+      - front_net
+      - back_net
+
 volumes:
   efk-data:
 
 networks:
   efk_net:
+  front_net:
+  back_net:

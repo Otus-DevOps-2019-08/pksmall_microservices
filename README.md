@@ -8,6 +8,13 @@ pksmall microservices repository
 
 ### logging-1
 + Создана новая ветка
++ Создан `docker-compose-logging.yml`
++ Поправлен `docker-compose.yml` для работы с `fluentd` и `zipkin`
++ Протестирована работа `fluentd`, `kibana` и `elesticsearch`
++ Добавлен `zipkin`
++ Дописано правило в `fluent.conf` для разбора 2-й лог-строки от `ui`. `*`
++ По ошибке в приложении ничего такого не нашел. Кроме  не правильных депенсев в `Gem` файлах
+  и `post-app.py`. `*`
 
 ### monotoring-2
 + Создана новая ветка
