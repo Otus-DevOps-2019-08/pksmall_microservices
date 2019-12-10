@@ -6,4 +6,5 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
     && apk del --virtual .build-deps gcc musl-dev
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts
+EXPOSE  5000
 CMD ["python3", "post_app.py"]

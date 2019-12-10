@@ -55,18 +55,37 @@ push-grafana: grafana
 # Make all images
 .PHONY: build-all
 build-all: prometheus
-	cd ../src/ui && bash docker_build.sh && cd $(ORIGDIR)
-	cd ../src/post-py && bash docker_build.sh && cd $(ORIGDIR)
-	cd ../src/comment && bash docker_build.sh && cd $(ORIGDIR)
+	build-reddit
 	cd ../monitoring/cloudprober && docker build -t $(USERNAME)/cloudprober . && cd $(ORIGDIR)
 	prometheus
 	alertmanager
 
-# Push images to docker hub
-.PHONY: push-all
-push-all:
+# fluentd
+.PHONY: fluentd
+fluentd:
+	cd ../logging/fluentd && docker build -t $(USERNAME)/fluentd . && cd $(ORIGDIR)
+
+.PHONY: push-fluentd
+push-fluentd: fluentd
+	docker push $(USERNAME)/fluentd
+
+# Make reddit
+.PHONY: build-reddit
+build-reddit:
+	cd ../src/ui && bash docker_build.sh && cd $(ORIGDIR)
+	cd ../src/post-py && bash docker_build.sh && cd $(ORIGDIR)
+	cd ../src/comment && bash docker_build.sh && cd $(ORIGDIR)
+
+# Push reddit images
+.PHONY: push-reddit
+push-reddit: build-reddit
 	docker push $(USERNAME)/ui
 	docker push $(USERNAME)/comment
 	docker push $(USERNAME)/post
+
+# Push images to docker hub
+.PHONY: push-all
+push-all:
+	push-reddit
 	docker push $(USERNAME)/cloudprober
 	push-prometheus
