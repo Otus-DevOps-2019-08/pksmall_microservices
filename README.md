@@ -8,6 +8,9 @@ pksmall microservices repository
 
 ### kubernetes-1
 + Создана новая ветка
++ Полностью отработана `kubernetes the hard way`.
++ Написан примерный план для `ansible`-плейбука для прохождения 
+`kubernetes the hard way`. `*`
 
 ### logging-1
 + Создана новая ветка
