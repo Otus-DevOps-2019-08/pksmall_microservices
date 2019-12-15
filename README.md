@@ -6,6 +6,9 @@ pksmall microservices repository
 
 ## Branches
 
+### kubernetes-1
++ Создана новая ветка
+
 ### logging-1
 + Создана новая ветка
 + Создан `docker-compose-logging.yml`
