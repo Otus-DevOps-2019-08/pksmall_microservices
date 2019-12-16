@@ -1,0 +1,47 @@
+- name: Create GCP Infrastructre
+  roles:
+    - gcp_infra
+
+- name: Create the PKI and Data Encrypting and Config
+  roles:
+    - pki-encrypt
+
+- name: Generate the Kubeconfig files
+  roles:
+    - kubeconfig
+
+- name: Download the k8s components
+  roles:
+    - k8s-download
+
+- name: Deploy Etcd cluster
+  roles:
+    - etcd
+
+- name: Deploy k8s controllers
+  roles:
+    - k8s-controller
+
+- name: Deploy k8s workers
+  roles:
+    - k8s-worker
+
+- name: Config kubectl for Remote Access
+  roles:
+    - k8s-remote
+
+- name: Provisioning Pod Network Access
+  roles:
+    - pods-net-access
+
+- name: Deploing the DNS Cluster Add-on
+  roles:
+    - dns-cluster
+
+- name: Smoke Test
+  roles:
+    - smoke-test
+
+- name: Clean Up
+  roles:
+    - clean-up

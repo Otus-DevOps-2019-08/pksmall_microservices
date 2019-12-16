@@ -6,6 +6,12 @@ pksmall microservices repository
 
 ## Branches
 
+### kubernetes-1
++ Создана новая ветка
++ Полностью отработана `kubernetes the hard way`.
++ Написан примерный план для `ansible`-плейбука для прохождения 
+`kubernetes the hard way`. `*`
+
 ### logging-1
 + Создана новая ветка
 + Создан `docker-compose-logging.yml`
