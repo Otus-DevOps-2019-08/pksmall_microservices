@@ -6,6 +6,12 @@ pksmall microservices repository
 
 ## Branches
 
+### kubernetes-2
++ Создана новая ветка
++ развернул `kubernets` в minikube
++ развернутый `kubernets` на GKE `http://35.184.167.47:32092/` `http://35.202.98.79:32092/`
++ добавил конфиг модуля `terraform`-а для развертывания `gke-k8s`. `*`  
+
 ### kubernetes-1
 + Создана новая ветка
 + Полностью отработана `kubernetes the hard way`.
