@@ -8,6 +8,7 @@ pksmall microservices repository
 
 ### kubernetes-3
 + Создана новая ветка
++ Добавил `tls` сертификат для доступа черех `https`
 + Добавил конфигурации `storage` для приложения.
 + Добавил в `network-policy` доступ `post` приложения. `*`
 
