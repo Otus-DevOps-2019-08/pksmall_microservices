@@ -6,6 +6,9 @@ pksmall microservices repository
 
 ## Branches
 
+### kubernetes-3
++ Создана новая ветка
+
 ### kubernetes-2
 + Создана новая ветка
 + развернул `kubernets` в minikube
