@@ -8,6 +8,8 @@ pksmall microservices repository
 
 ### kubernetes-3
 + Создана новая ветка
++ Добавил конфигурации `storage` для приложения.
++ Добавил в `network-policy` доступ `post` приложения. `*`
 
 ### kubernetes-2
 + Создана новая ветка
