@@ -34,6 +34,5 @@ spec:
           emptyDir: {}
           volumes:
         - name: mongo-gce-pd-storage
-          gcePersistentDisk:
-            pdName: reddit-mongo-disk
-            fsType: ext4
+          persistentVolumeClaim:
+            claimName: mongo-pvc
