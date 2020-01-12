@@ -1,0 +1,14 @@
+kind: Prometheus
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  serviceAccountName: prometheus
+    serviceMonitorSelector:
+      matchLabels:
+        prometheus: servicemonitor
+  resources:
+    requests:
+      memory: 400Mi
+      enableAdminAPI: false

@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: post
+  labels:
+    prometheus: servicemonitor
+spec:
+  selector:
+    matchLabels:
+      app: post
+  endpoints:
+    - path: /metrics
+    port: metrics
+    interval: 10s

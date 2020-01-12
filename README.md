@@ -6,13 +6,21 @@ pksmall microservices repository
 
 ## Branches
 
+### kubernetes-5
++ Создана новая ветка
++ Развернул `prometheus` из `helm chart`-а.
++ Включил `node-exporter` в `custom-values.yml`.
++ Разделил `reddit-endpoint` на 3 части `post-endpoint`, `ui-endpoint`, `comment-endpoint`.
++ Параметризировал старый дашборд. 
++ Создал `helm` чарт для `efk`. *   
+
 ### kubernetes-4
 + Создана новая ветка
 + `helm init` в версии 3 больше уже не нужен.
-+ `helm search` изменилась, добавлены парметры `hub` и `repo`. `hub` - ведет поиск 
-в репозитарии хелма, `repo` - используеют свой/другой репозитарий, созданный самостоятельно
-или добавленный с помощью `help repo add`. И `version` это версия чарта, а не самого приложения
-в списке получаемым с помощью `help search hub appName`.
++ `helm search` изменилась, добавлены параметры `hub` и `repo`. `hub` - ведет поиск 
+в репозитарии хелма, `repo` - использует свой/другой репозитарий, созданный самостоятельно
+или добавленный с помощью `help repo add`. И `version` это версия чарта, а не самого 
+приложения в списке получаемым с помощью `help search hub appName`.
 + `helm` развернут и протестированы все `Charts`.
 + `gitlab` развернут и протестирован.
 + обвновлены `.gitlab-ci.yml` под новый вид, как требует `gitlab`
