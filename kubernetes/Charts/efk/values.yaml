@@ -1,0 +1,4 @@
+---
+storage:
+  type: standard
+  size: 2Gi
